@@ -1,0 +1,14 @@
+2025-08-13 17:31:45,243 [INFO] Step-1: Folder created: uploads/cfab9af0-3923-429c-82d9-3dd141ea9622
+2025-08-13 17:31:45,251 [INFO] Step-2: File sent {'questions.txt': 'uploads/cfab9af0-3923-429c-82d9-3dd141ea9622/questions.txt', 'sample-sales.csv': 'uploads/cfab9af0-3923-429c-82d9-3dd141ea9622/sample-sales.csv'}
+2025-08-13 17:31:45,251 [INFO] Step-3: Getting scrap code and metadata from llm. Tries count = 0
+2025-08-13 17:31:57,380 [INFO] Step-3: Response from scrapping: a line chart with a red line. Encode as base64 PNG.'], 'comment': 'Step-3: Getting scrap code and metadata from llm. Tries count = %d 0'}
+2025-08-13 17:31:58,766 [INFO] Step-4: Execution result of the scrape code: ✅ Code executed successfully after installing libraries.
+2025-08-13 17:31:58,766 [INFO] Step-5: Getting execution code from llm. Tries count = 0
+2025-08-13 17:32:10,660 [INFO] Step-5: Response from llm: total_sales, "top_region": top_region, "day_sales_correlation": day_sales_correlation, "bar_chart": bar_chart_base64, "median_sales": median_sales, "total_sales_tax": total_sales_tax, "cumulative_sales_chart": cumulative_sales_chart_base64 } output_path = "uploads/cfab9af0-3923-429c-82d9-3dd141ea9622/result.json" with open(output_path, 'w') as f: json.dump(result, f, indent=2)
+2025-08-13 17:32:10,660 [INFO] Step-6: Executing final code. Tries count = 0
+2025-08-13 17:32:12,931 [INFO] Step-6: Executing final code result: o = _default(o) ^^^^^^^^^^^ File "/usr/lib/python3.12/json/encoder.py", line 180, in default raise TypeError(f'Object of type {o.__class__.__name__} ' TypeError: Object of type int64 is not JSON serializable
+2025-08-13 17:32:12,931 [ERROR] Step-6: Error occured while executing code. Tries count = 2
+2025-08-13 17:32:12,931 [INFO] Step-5: Getting execution code from llm. Tries count = 1
+2025-08-13 17:32:26,147 [INFO] Step-5: Response from llm: np.generic) else total_sales_tax, "cumulative_sales_chart": cumulative_sales_chart_base64 } # Save the results to a JSON file output_path = "uploads/cfab9af0-3923-429c-82d9-3dd141ea9622/result.json" with open(output_path, 'w') as f: json.dump(results, f, indent=2)
+2025-08-13 17:32:28,819 [INFO] Step-6: Executing final code result: ✅ Code executed successfully after installing libraries.
+2025-08-13 17:32:28,819 [INFO] Step-7: send result back

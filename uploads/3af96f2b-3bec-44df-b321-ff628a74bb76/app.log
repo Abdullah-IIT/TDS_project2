@@ -1,0 +1,13 @@
+2025-08-13 16:51:45,380 [INFO] Step-1: Folder created: uploads/3af96f2b-3bec-44df-b321-ff628a74bb76
+2025-08-13 16:51:45,405 [INFO] Step-2: File sent {'question.txt.txt': 'uploads/3af96f2b-3bec-44df-b321-ff628a74bb76/question.txt.txt'}
+2025-08-13 16:51:45,405 [INFO] Step-3: Getting scrap code and metadata from llm. Tries count = 0
+2025-08-13 16:52:09,671 [INFO] Step-3: Response from scrapping: and Peak along with a dotted red regression line through it.'], 'comment': 'Step-3: Getting scrap code and metadata from llm. Tries count = %d 0'}
+2025-08-13 16:52:12,551 [INFO] Step-4: Execution result of the scrape code: 26, in execute_code exec(code, exec_globals) File "<string>", line 77 f.write("["Answer to Q1", "Answer to Q2", ...]\n") ^^^^^^^^^ SyntaxError: invalid syntax. Perhaps you forgot a comma?
+2025-08-13 16:52:12,551 [ERROR] Step-4: Error occured while scrapping. Tries count = 0
+2025-08-13 16:52:25,205 [INFO] Step-3: Response from scrapping: line through it. Return as a base-64 encoded data URI, "data:image/png;base64,iVBORw0KG..." under 100,000 bytes.'], 'comment': 'Step-4: Error occured while scrapping. Tries count = %d, 0'}
+2025-08-13 16:52:30,673 [INFO] Step-4: Execution result of the scrape code: ✅ Code executed successfully after installing libraries.
+2025-08-13 16:52:30,673 [INFO] Step-5: Getting execution code from llm. Tries count = 0
+2025-08-13 16:52:47,347 [INFO] Step-5: Response from llm: results output_data = [q1_result, q2_result, q3_result, q4_result] # Save the result to a JSON file output_file_path = "uploads/3af96f2b-3bec-44df-b321-ff628a74bb76/result.json" with open(output_file_path, 'w') as f: json.dump(output_data, f)
+2025-08-13 16:52:47,348 [INFO] Step-6: Executing final code. Tries count = 0
+2025-08-13 16:52:52,741 [INFO] Step-6: Executing final code result: ✅ Code executed successfully after installing libraries.
+2025-08-13 16:52:52,742 [INFO] Step-7: send result back

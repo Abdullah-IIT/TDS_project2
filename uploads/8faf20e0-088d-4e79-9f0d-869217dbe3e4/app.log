@@ -1,0 +1,7 @@
+2025-08-13 17:26:43,659 [INFO] Step-1: Folder created: uploads/8faf20e0-088d-4e79-9f0d-869217dbe3e4
+2025-08-13 17:26:43,703 [INFO] Step-2: File sent {'questions.txt': 'uploads/8faf20e0-088d-4e79-9f0d-869217dbe3e4/questions.txt', 'sample-sales.csv': 'uploads/8faf20e0-088d-4e79-9f0d-869217dbe3e4/sample-sales.csv'}
+2025-08-13 17:26:43,705 [INFO] Step-3: Getting scrap code and metadata from llm. Tries count = 0
+2025-08-13 17:26:55,959 [INFO] Step-3: Response from scrapping: a line chart with a red line. Encode as base64 PNG.'], 'comment': 'Step-3: Getting scrap code and metadata from llm. Tries count = %d 0'}
+2025-08-13 17:26:57,649 [INFO] Step-4: Execution result of the scrape code: ✅ Code executed successfully after installing libraries.
+2025-08-13 17:26:57,649 [INFO] Step-5: Getting execution code from llm. Tries count = 0
+2025-08-13 17:27:05,632 [ERROR] Step-5: Error: Invalid \escape: line 2 column 977 (char 978)

@@ -1,0 +1,231 @@
+
+[2025-08-13 17:31:58]
+📜 Executing Code:
+import pandas as pd
+import os
+
+upload_folder = "uploads/cfab9af0-3923-429c-82d9-3dd141ea9622"
+os.makedirs(upload_folder, exist_ok=True)
+
+input_csv_path = os.path.join(upload_folder, "sample-sales.csv")
+output_data_path = os.path.join(upload_folder, "data.csv")
+metadata_path = os.path.join(upload_folder, "metadata.txt")
+
+# Load the CSV data
+df = pd.read_csv(input_csv_path)
+
+# Save the loaded DataFrame to data.csv as required
+df.to_csv(output_data_path, index=False)
+
+# Collect metadata
+with open(metadata_path, "w") as f:
+    f.write("--- DataFrame Info ---\n")
+    df.info(buf=f)
+    f.write("\n--- DataFrame Columns ---\n")
+    f.write(str(df.columns.tolist()))
+    f.write("\n\n--- DataFrame Head ---\n")
+    f.write(str(df.head().to_string()))
+    f.write("\n\n--- Files Stored ---\n")
+    f.write(
+        f"- Path: {output_data_path}, Description: Processed sales data derived from sample-sales.csv.\n"
+    )
+    f.write("\n--- Expected JSON Answer Format ---\n")
+    f.write(
+        '{\n  "total_sales": "number",\n  "top_region": "string",\n  "day_sales_correlation": "number",\n  "bar_chart": "base64 PNG string under 100kB",\n  "median_sales": "number",\n  "total_sales_tax": "number",\n  "cumulative_sales_chart": "base64 PNG string under 100kB"\n}'
+    )
+
+----------------------------------------
+
+[2025-08-13 17:31:58]
+✅ Code executed successfully after installing libraries.
+----------------------------------------
+
+[2025-08-13 17:32:12]
+📜 Executing Code:
+import pandas as pd
+import matplotlib.pyplot as plt
+import io
+import base64
+import json
+
+df = pd.read_csv("uploads/cfab9af0-3923-429c-82d9-3dd141ea9622/data.csv")
+
+df["date_dt"] = pd.to_datetime(df["date"])
+
+total_sales = df["sales"].sum()
+
+region_sales = df.groupby("region")["sales"].sum()
+top_region = region_sales.idxmax()
+
+df["day_of_month"] = df["date_dt"].dt.day
+day_sales_correlation = df["day_of_month"].corr(df["sales"])
+
+plt.figure(figsize=(8, 6))
+region_sales.plot(kind="bar", color="blue")
+plt.title("Total Sales by Region")
+plt.xlabel("Region")
+plt.ylabel("Total Sales")
+plt.xticks(rotation=45)
+plt.tight_layout()
+bar_chart_buffer = io.BytesIO()
+plt.savefig(bar_chart_buffer, format="png", bbox_inches="tight")
+plt.close()
+bar_chart_base64 = base64.b64encode(bar_chart_buffer.getvalue()).decode("utf-8")
+
+median_sales = df["sales"].median()
+
+total_sales_tax = total_sales * 0.10
+
+df_sorted = df.sort_values(by="date_dt")
+df_sorted["cumulative_sales"] = df_sorted["sales"].cumsum()
+
+plt.figure(figsize=(10, 6))
+plt.plot(df_sorted["date_dt"], df_sorted["cumulative_sales"], color="red")
+plt.title("Cumulative Sales Over Time")
+plt.xlabel("Date")
+plt.ylabel("Cumulative Sales")
+plt.grid(True)
+plt.tight_layout()
+cumulative_sales_chart_buffer = io.BytesIO()
+plt.savefig(cumulative_sales_chart_buffer, format="png", bbox_inches="tight")
+plt.close()
+cumulative_sales_chart_base64 = base64.b64encode(
+    cumulative_sales_chart_buffer.getvalue()
+).decode("utf-8")
+
+result = {
+    "total_sales": total_sales,
+    "top_region": top_region,
+    "day_sales_correlation": day_sales_correlation,
+    "bar_chart": bar_chart_base64,
+    "median_sales": median_sales,
+    "total_sales_tax": total_sales_tax,
+    "cumulative_sales_chart": cumulative_sales_chart_base64,
+}
+
+output_path = "uploads/cfab9af0-3923-429c-82d9-3dd141ea9622/result.json"
+with open(output_path, "w") as f:
+    json.dump(result, f, indent=2)
+
+----------------------------------------
+
+[2025-08-13 17:32:12]
+❌ Error during code execution:
+Traceback (most recent call last):
+  File "/root/TDS_project2/task_engine.py", line 48, in run_python_code
+    execute_code()
+  File "/root/TDS_project2/task_engine.py", line 26, in execute_code
+    exec(code, exec_globals)
+  File "<string>", line 62, in <module>
+  File "/usr/lib/python3.12/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/usr/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
+
+----------------------------------------
+
+[2025-08-13 17:32:28]
+📜 Executing Code:
+import pandas as pd
+import matplotlib.pyplot as plt
+import io
+import base64
+import json
+import numpy as np
+
+# Load the data
+df = pd.read_csv("uploads/cfab9af0-3923-429c-82d9-3dd141ea9622/data.csv")
+
+# Ensure 'date' column is datetime
+df["date"] = pd.to_datetime(df["date"])
+
+# 1. Total sales across all regions
+total_sales = df["sales"].sum()
+
+# 2. Region with the highest total sales
+region_sales = df.groupby("region")["sales"].sum()
+top_region = region_sales.idxmax()
+
+# 3. Correlation between day of month and sales
+df["day_of_month"] = df["date"].dt.day
+day_sales_correlation = df["day_of_month"].corr(df["sales"])
+
+# 4. Plot total sales by region as a bar chart
+plt.figure(figsize=(8, 5))
+region_sales.plot(kind="bar", color="blue")
+plt.title("Total Sales by Region")
+plt.xlabel("Region")
+plt.ylabel("Total Sales")
+plt.xticks(rotation=45)
+plt.tight_layout()
+bar_chart_buffer = io.BytesIO()
+plt.savefig(bar_chart_buffer, format="png", bbox_inches="tight")
+plt.close()
+bar_chart_base64 = base64.b64encode(bar_chart_buffer.getvalue()).decode("utf-8")
+
+# 5. Median sales amount across all orders
+median_sales = df["sales"].median()
+
+# 6. Total sales tax if the tax rate is 10%
+tax_rate = 0.10
+total_sales_tax = total_sales * tax_rate
+
+# 7. Plot cumulative sales over time as a line chart
+df_sorted = df.sort_values(by="date")
+df_sorted["cumulative_sales"] = df_sorted["sales"].cumsum()
+
+plt.figure(figsize=(10, 6))
+plt.plot(df_sorted["date"], df_sorted["cumulative_sales"], color="red")
+plt.title("Cumulative Sales Over Time")
+plt.xlabel("Date")
+plt.ylabel("Cumulative Sales")
+plt.grid(True)
+plt.tight_layout()
+cumulative_sales_chart_buffer = io.BytesIO()
+plt.savefig(cumulative_sales_chart_buffer, format="png", bbox_inches="tight")
+plt.close()
+cumulative_sales_chart_base64 = base64.b64encode(
+    cumulative_sales_chart_buffer.getvalue()
+).decode("utf-8")
+
+# Prepare the results dictionary, converting numpy types to standard Python types
+results = {
+    "total_sales": (
+        total_sales.item() if isinstance(total_sales, np.generic) else total_sales
+    ),
+    "top_region": top_region,
+    "day_sales_correlation": (
+        day_sales_correlation.item()
+        if isinstance(day_sales_correlation, np.generic)
+        else day_sales_correlation
+    ),
+    "bar_chart": bar_chart_base64,
+    "median_sales": (
+        median_sales.item() if isinstance(median_sales, np.generic) else median_sales
+    ),
+    "total_sales_tax": (
+        total_sales_tax.item()
+        if isinstance(total_sales_tax, np.generic)
+        else total_sales_tax
+    ),
+    "cumulative_sales_chart": cumulative_sales_chart_base64,
+}
+
+# Save the results to a JSON file
+output_path = "uploads/cfab9af0-3923-429c-82d9-3dd141ea9622/result.json"
+with open(output_path, "w") as f:
+    json.dump(results, f, indent=2)
+
+----------------------------------------
+
+[2025-08-13 17:32:28]
+✅ Code executed successfully after installing libraries.
+----------------------------------------

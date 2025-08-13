@@ -1,0 +1,4 @@
+2025-08-13 17:28:07,998 [INFO] Step-1: Folder created: uploads/612b538a-3f73-4095-b9bf-5e7b27ff2743
+2025-08-13 17:28:08,002 [INFO] Step-2: File sent {'questions.txt': 'uploads/612b538a-3f73-4095-b9bf-5e7b27ff2743/questions.txt', 'sample-sales.csv': 'uploads/612b538a-3f73-4095-b9bf-5e7b27ff2743/sample-sales.csv'}
+2025-08-13 17:28:08,002 [INFO] Step-3: Getting scrap code and metadata from llm. Tries count = 0
+2025-08-13 17:28:13,052 [INFO] Step-3: Response from scrapping: "median_sales": number,\\n\')\n f.write(\' "total_sales_tax": number,\\n\')\n f.write(\' "cumulative_sales_chart": base64 PNG string\\n\')\n f.write(\'}\\n\')\n', 'comment': 'Step-3: Getting scrap code and metadata from llm. Tries count = %d 0'}

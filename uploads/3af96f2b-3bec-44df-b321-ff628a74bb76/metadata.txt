@@ -1,0 +1,6 @@
+Scraping Failed:
+
+Could not find the table on the page at https://en.wikipedia.org/wiki/List_of_highest-grossing_films.
+
+Expected JSON Answer Format for analysis:
+["Answer to Q1", "Answer to Q2", "Answer to Q3", "data:image/png;base664,..."]

@@ -1,0 +1,56 @@
+
+[2025-08-13 17:26:57]
+📜 Executing Code:
+import pandas as pd
+import os
+
+# Define the upload directory path
+UPLOAD_DIR = "uploads/8faf20e0-088d-4e79-9f0d-869217dbe3e4"
+
+# Create the upload directory if it doesn't exist
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+# Define input and output file paths
+input_csv_path = os.path.join(UPLOAD_DIR, "sample-sales.csv")
+output_data_path = os.path.join(UPLOAD_DIR, "data.csv")
+metadata_path = os.path.join(UPLOAD_DIR, "metadata.txt")
+
+# Read the CSV file into a pandas DataFrame
+df = pd.read_csv(input_csv_path)
+
+# Save the DataFrame to data.csv
+df.to_csv(output_data_path, index=False)
+
+# Generate metadata
+with open(metadata_path, "w") as f:
+    f.write(f"Collected Data File: {output_data_path}\n")
+    f.write("Description: The raw sales data from sample-sales.csv.\n\n")
+
+    f.write("DataFrame Info:\n")
+    df.info(buf=f)
+    f.write("\n\n")
+
+    f.write("DataFrame Columns:\n")
+    f.write(str(df.columns.tolist()))
+    f.write("\n\n")
+
+    f.write("DataFrame Head:\n")
+    f.write(df.head().to_string())
+    f.write("\n\n")
+
+    f.write("Expected JSON Answer Format:\n")
+    f.write("{\n")
+    f.write('  "total_sales": "number",\n')
+    f.write('  "top_region": "string",\n')
+    f.write('  "day_sales_correlation": "number",\n')
+    f.write('  "bar_chart": "base64 PNG string under 100kB",\n')
+    f.write('  "median_sales": "number",\n')
+    f.write('  "total_sales_tax": "number",\n')
+    f.write('  "cumulative_sales_chart": "base64 PNG string under 100kB"\n')
+    f.write("}\n")
+
+----------------------------------------
+
+[2025-08-13 17:26:57]
+✅ Code executed successfully after installing libraries.
+----------------------------------------

@@ -1,0 +1,16 @@
+{
+    "code": "import pandas as pd\nimport os\n\nupload_folder = 'uploads/cfab9af0-3923-429c-82d9-3dd141ea9622'\nos.makedirs(upload_folder, exist_ok=True)\n\ninput_csv_path = os.path.join(upload_folder, 'sample-sales.csv')\noutput_data_path = os.path.join(upload_folder, 'data.csv')\nmetadata_path = os.path.join(upload_folder, 'metadata.txt')\n\n# Load the CSV data\ndf = pd.read_csv(input_csv_path)\n\n# Save the loaded DataFrame to data.csv as required\ndf.to_csv(output_data_path, index=False)\n\n# Collect metadata\nwith open(metadata_path, 'w') as f:\n    f.write('--- DataFrame Info ---\\n')\n    df.info(buf=f)\n    f.write('\\n--- DataFrame Columns ---\\n')\n    f.write(str(df.columns.tolist()))\n    f.write('\\n\\n--- DataFrame Head ---\\n')\n    f.write(str(df.head().to_string()))\n    f.write('\\n\\n--- Files Stored ---\\n')\n    f.write(f'- Path: {output_data_path}, Description: Processed sales data derived from sample-sales.csv.\\n')\n    f.write('\\n--- Expected JSON Answer Format ---\\n')\n    f.write('{\\n  \"total_sales\": \"number\",\\n  \"top_region\": \"string\",\\n  \"day_sales_correlation\": \"number\",\\n  \"bar_chart\": \"base64 PNG string under 100kB\",\\n  \"median_sales\": \"number\",\\n  \"total_sales_tax\": \"number\",\\n  \"cumulative_sales_chart\": \"base64 PNG string under 100kB\"\\n}')",
+    "libraries": [
+        "pandas"
+    ],
+    "questions": [
+        "What is the total sales across all regions?",
+        "Which region has the highest total sales?",
+        "What is the correlation between day of month and sales? (Use the date column.)",
+        "Plot total sales by region as a bar chart with blue bars. Encode as base64 PNG.",
+        "What is the median sales amount across all orders?",
+        "What is the total sales tax if the tax rate is 10%?",
+        "Plot cumulative sales over time as a line chart with a red line. Encode as base64 PNG."
+    ],
+    "comment": "Step-3: Getting scrap code and metadata from llm. Tries count = %d 0"
+}
